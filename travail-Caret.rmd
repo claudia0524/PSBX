@@ -1,0 +1,82 @@
+---
+title: "<p style="text-align:center;"> CARET</p>"
+author: "<p style="text-align:center;">Wenjun ZHAO</p>"
+date: "<p style="text-align:center;">12/9/2020</p>"
+output:
+  pdf_document: default
+  html_document: default
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+<p style="text-indent:32px;">Nous allons désormais apprendre à utiliser le package **Caret**. Cette librairie permet de faire de l'analyse prédictive.</p> 
+
+<p style="text-indent:32px;">Tout comme les autres librairies abordées plus tôt, il faut d'abord installer le package pour pouvoir l'utiliser :</p>
+
+<p style="text-indent:32px;"><span style="background-color:yellow;">install.packages("caret")</span></p>
+
+<p style="text-indent:32px;">Pour mieux comprendre cette librairie, nous allons présenter une exemple:</p>
+
+<span style="font-size:24px;"> **I. var_seq: Séquences De Variables Pour Le Réglage**</span>
+
+Cette fonction génère une séquence de mtry valeurs pour les forêts aléatoires
+
+<span style="font-size:20px;">**Arguments**</span>
+
+**p**: Le nombre de prédicteurs
+
+**classification**: Le résultat est-il un facteur ( classification = TRUE ou numérique?)
+
+**len**: Le nombre de mtryvaleurs à générer.
+
+<span style="font-size:20px;">**Détails**</span>
+
+Si le nombre de prédicteurs est inférieur à 500, une simple séquence de valeurs de longueur len est générée entre 2 et p. Pour un plus grand nombre de prédicteurs, la séquence est créée à l'aide d' log2 étapes
+
+Si len = 1, les valeurs par défaut du randomForest package sont utilisées
+
+```{r}
+
+library(caret)
+
+var_seq(p = 100, len = 10)
+var_seq(p = 600, len = 10)
+
+```
+
+<span style="font-size:24px;"> **II. as.matrix.confusionMatrix**</span>
+
+<span style="font-size:20px;">**Arguments**</span>
+
+**X**: un objet de classe confusionMatrix
+
+**what**: données à convertir en matrice. Soit "xtabs", "overall"soit "classes"
+
+**…**: non utilisé actuellement
+
+```{r}
+library(caret)
+lvs <- c("normal", "abnormal")
+truth <- factor(rep(lvs, times = c(86, 258)),
+                levels = rev(lvs))
+pred <- factor(
+               c(
+                 rep(lvs, times = c(54, 32)),
+                 rep(lvs, times = c(27, 231))),
+               levels = rev(lvs))
+
+xtab <- table(pred, truth)
+
+results <- confusionMatrix(xtab)
+as.table(results)
+as.matrix(results)
+as.matrix(results, what = "overall")
+as.matrix(results, what = "classes")
+```
+
+
+
+
+
