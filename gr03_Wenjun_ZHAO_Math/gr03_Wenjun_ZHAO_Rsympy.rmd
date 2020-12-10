@@ -1,0 +1,56 @@
+---
+title: "Rsympy"
+author: "Wenjun ZHAO"
+date: "12/9/2020"
+output:
+  pdf_document: default
+  html_document: default
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+Nous allons maintenant aborder les fonctions mathématiques de RStudio. Nous allons voir la fonction *rSymPy*.
+
+Cette fonction sert à traiter les nombres pairs et impairs, les nombres réels, les complexes, les nombres premiers et l'infini. Pour commencer, nous allons installer la fonction rSymPy:
+
+*install.packages("rSymPy")*
+
+La *sympy* fonction passe une chaîne d'entrée à SymPy et renvoie la sortie. La première fois qu'il *sympy* est invoqué dans une session, il démarre également SymPy en invoquant *sympyStart* (qui définit les chemins appropriés, les appels *jythonStart* puis les importations *sympy*). En conséquence, on peut s'attendre à ce que la première invocation de sympy soit beaucoup plus lente que les suivantes. *jythonStart* crée une variable *.Jython* qui est stockée dans l'environnement global contenant les informations de connexion à la session SymPy / Jython.
+
+*install.packages("rJython")*
+
+*install.packages("rJava")*
+
+En interne, si l'argument *output=TRUE*, la chaîne de caractères d'entrée par défaut, est précédé de *__Rsympy=* donc si une telle préface provoque une erreur, assurez-vous que l'argument *output=FALSE*.
+
+Maintenant, nous allons voir certaines possibilités de base de cette librairie:
+
+```{r}
+library(rSymPy)
+
+# create a SymPy variable called x
+sympy("var('x')")
+
+sympy("y = x*x")
+sympy("y")
+
+sympy("limit(1/x, x, oo)")
+
+# the next line fails under jython even without R
+# and seems to corrupt the rest of the session
+# sympy("(1/cos(x)).series(x, 0, 10)")
+
+sympy("diff(sin(2*x), x, 1)")
+sympy("diff(sin(2*x), x, 2)")
+
+sympy("integrate(exp(-x), (x, 0, oo))")
+
+sympy("xr = Symbol('xr', real=True)")
+sympy("exp(I*xr).expand(complex=True)")
+
+# Matrices are stored row by row (unlike R matrices)
+cat(sympy("A = Matrix([[1,x], [y,1]])"), "\n")
+cat(sympy("A**2"), "\n")
+```
