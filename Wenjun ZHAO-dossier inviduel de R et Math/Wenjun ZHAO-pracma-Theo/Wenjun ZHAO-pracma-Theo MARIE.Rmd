@@ -1,0 +1,87 @@
+---
+title: "Analyse de pracma par Theo Marie"
+author: "Wenjun ZHAO"
+date: "12/22/2020"
+output: pdf_document
+bibliography : pracma.bib
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# I. Introduction
+
+Vous pouvez retrouver mon travail sur mon Github, **https://github.com/claudia0524/PSBX**.
+
+Pour ce dossier, nous avons étudier le travail de Theo Marie, étudiant en M2DM au sein de PSB.
+
+Nous avons trouvé son dossier sur son Github : **https://github.com/theomarie78960/PSBX**
+
+Maintenant, nous allons établir mes 5 critères d'évaluations, qui seront les mêmes pour tout les dossiers que j'ai vais étudier pour ce devoir:
+
+**Les cinq critères d'évaluation**
+
+*1. Rmd se comporte bien à l'exécution*
+
+*2. Les aspects intéressant, didactique, complet*
+
+*3. La qualité Rmarkdown, la qualité de l'écriture*
+
+*4. Didactique, conformité aux exigences vues plus haut et comporte du calcul symbolique et du calcul numérique*
+
+*5. La qualité du LaTeX et des illustrations, la qualité de l'écriture, le choix des ressource internet, la compréhension personnelle des concepts*
+
+# II. Synthèse du travail en question
+
+Le package **pracma** est une librairie pour ceux qui ont la bosse des Maths, ou tout simplement pour ceux veulent utiliser quelques fonctions spéciales. En effet, ce package vous offre la possibilité de faire de l'analyse numérique, de l'algèbre niléaire, des équations différentielles, des séries chronologiques, mais aussi de travailler sur des problèmes mathématiques complexes.[@theo]
+
+Nous allons maintenant étudier le code de Theo Marie dans le chapitre suivant.
+
+# III. Extrait commenté des parties de code
+
+**Voici quelques fonctions assez simples que l'on peut utiliser grâce à pracma**
+
+Commençons par **LA NORME DES VECTEURS**
+
+```{r}
+library(pracma)
+norm(c(1,1), type="2")
+```
+
+Transformer les degrés en radians avec **deg2rad**
+```{r}
+library(pracma)
+deg2rad(180)
+```
+
+Transformer les radians en degrés avec **rad2deg**
+```{r}
+library(pracma)
+deg2rad(3*pi)
+```
+
+Maintenant, ça se corse : vous voulez savoir quelle est la prochaine valeur égale à un carré, après n'importe quelle valeur. **nextpow2()**
+```{r}
+library(pracma)
+nextpow2(11)
+```
+Vous pouvez trouver beaucoup de ces fonctions sur ce **[site internet](https://cran.r-project.org/web/packages/pracma/pracma.pdf)**
+
+# IV. Evaluation du travail en question
+
+*1. Rmd se comporte bien à l'exécution (4/4)*
+
+*2. Les aspects intéressant, didactique, complet (3/4)*
+
+*3. La qualité Rmarkdown, la qualité de l'écriture (4/4)*
+
+*4. Didactique, conformité aux exigences vues plus haut et comporte du calcul symbolique et du calcul numérique (3/4)*
+
+*5. La qualité du LaTeX et des illustrations, la qualité de l'écriture, le choix des ressource internet, la compréhension personnelle des concepts (3/4)*
+
+# V. Conclusion
+
+En général, ce tracail de theo exécuse bien dans l'environement de R. Et il nous explique clairement comment fonctionner le package pracma dans un rmd. L'aspect est intéressant, complet et propre. La qualité Rmarkdown et la qualité de l'écriture sont ainsi bien. Didactique, conformité aux exigences vues plus haut. La qualité du LaTeX fonctionne bien aussi, et il peut montrer le but principal de package de pracma. Le mieux point est qu'il présente des ressources internet. Il utilise des calcul symbolique et du calcul numérique.
+
+# VI. Bibliographie

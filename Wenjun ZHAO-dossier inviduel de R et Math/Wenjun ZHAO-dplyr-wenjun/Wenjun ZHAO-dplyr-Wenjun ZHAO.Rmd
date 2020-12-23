@@ -1,0 +1,123 @@
+---
+title: "Analyse de DPLYR par WENJUN ZHAO"
+author: "Wenjun ZHAO"
+date: "12/20/2020"
+output: pdf_document
+bibliography : dplyr.bib
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# I. Introduction
+
+Vous pouvez retrouver mon travail sur mon Github, **https://github.com/claudia0524/PSBX**.
+
+Pour ce dossier, nous avons étudier mon travail, étudiant en M2DM au sein de PSB.
+
+Nous avons trouvé son dossier sur son Github : **https://github.com/claudia0524/PSBX**
+
+Maintenant, nous allons établir mes 5 critères d'évaluations, qui seront les mêmes pour tout les dossiers que j'ai vais étudier pour ce devoir:
+
+**Les cinq critères d'évaluation**
+
+*1. Rmd se comporte bien à l'exécution*
+
+*2. Les aspects intéressant, didactique, complet*
+
+*3. La qualité Rmarkdown, la qualité de l'écriture*
+
+*4. Didactique, conformité aux exigences vues plus haut et comporte du calcul symbolique et du calcul numérique*
+
+*5. La qualité du LaTeX et des illustrations, la qualité de l'écriture, le choix des ressource internet, la compréhension personnelle des concepts*
+
+# II. Synthèse du travail en question
+
+dplyr est une grammaire de manipulation de données, fournissant un ensemble cohérent de verbes qui vous aident à résoudre les défis de manipulation de données les plus courants.
+
+Tout cela se combine naturellement avec *group_by ()* qui vous permet d'effectuer n'importe quelle opération «par groupe». Vous pouvez en savoir plus sur eux dans *vignette ("dplyr")*. En plus de ces verbes à table unique, dplyr fournit également une variété de verbes à deux tables, que vous pouvez découvrir en *vignette ("two-table")*.
+
+dplyr est conçu pour résumer la manière dont les données sont stockées. Cela signifie qu'en plus de travailler avec des trames de données locales, vous pouvez également travailler avec des tables de base de données distantes, en utilisant exactement le même code R. Installez le package dbplyr puis lisez *vignette ("databases", package = "dbplyr")*.
+
+Nous allons maintenant étudier mes codes dans le chapitre suivant.
+
+# III. Extrait commenté des parties de code
+
+# Installation
+
+Le moyen le plus simple d'obtenir dplyr est d'installer tout le tidyverse[@Wenjun]:
+
+*install.packages ("tidyverse")*
+
+Alternativement, installez simplement dplyr:
+
+*install.packages ("dplyr")*
+
+Ou la version de développement de GitHub:
+
+*install.packages ("devtools")*
+
+*devtools :: install_github ("tidyverse / dplyr")*
+
+# Utilisation
+
+```{r}
+
+library(dplyr)
+
+starwars %>% 
+  filter(species == "Droid")
+```
+```{r}
+
+library(dplyr)
+
+starwars %>% 
+  select(name, ends_with("color"))
+```
+```{r}
+
+library(dplyr)
+
+starwars %>% 
+  mutate(name, bmi = mass / ((height / 100)  ^ 2)) %>%
+  select(name:mass, bmi)
+```
+```{r}
+
+library(dplyr)
+
+starwars %>% 
+  arrange(desc(mass))
+```
+```{r}
+
+library(dplyr)
+
+starwars %>%
+  group_by(species) %>%
+  summarise(
+    n = n(),
+    mass = mean(mass, na.rm = TRUE)
+  ) %>%
+  filter(n > 1)
+```
+
+# IV. Evaluation du travail en question
+
+*1. Rmd se comporte bien à l'exécution (2/4)*
+
+*2. Les aspects intéressant, didactique, complet (3/4)*
+
+*3. La qualité Rmarkdown, la qualité de l'écriture (3/4)*
+
+*4. Didactique, conformité aux exigences vues plus haut et comporte du calcul symbolique et du calcul numérique (3/4)*
+
+*5. La qualité du LaTeX et des illustrations, la qualité de l'écriture, le choix des ressource internet, la compréhension personnelle des concepts (3/4)*
+
+# V. Conclusion
+
+En général, ce travail exécuse bien dans l'environement de R. Et il nous explique clairement comment fonctionner le package Dplyr dans un rmd, On comprend rapidement le but principal de ce package. L'aspect est intéressant, complet et propre. D'ailleurs, il a expliqué chaque code, on peut les comprendre facilement. Il a présenté des fonctions qui peut être utile pour analyser des données dans les rapports. La qualité Rmarkdown, la qualité de l'écriture et La qualité du LaTeX sont ainsi bien.
+
+# VI. Bibliographie

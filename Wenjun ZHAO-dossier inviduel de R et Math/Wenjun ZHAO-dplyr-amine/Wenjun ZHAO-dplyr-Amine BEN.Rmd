@@ -1,0 +1,137 @@
+---
+title: "Analyse de Dplyr par Amine BEN"
+author: "Wenjun ZHAO"
+date: "12/20/2020"
+output: pdf_document
+bibliography : dplyr.bib
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# I. Introduction
+
+Vous pouvez retrouver mon travail sur mon Github, **https://github.com/claudia0524/PSBX**.
+
+Pour ce dossier, nous avons étudier le travail de Amine BEN, étudiant en M2DM au sein de PSB.
+
+Nous avons trouvé son dossier sur son Github : **https://github.com/benben62/PSBX.git**
+
+Maintenant, nous allons établir mes 5 critères d'évaluations, qui seront les mêmes pour tout les dossiers que j'ai vais étudier pour ce devoir:
+
+**Les cinq critères d'évaluation**
+
+*1. Rmd se comporte bien à l'exécution*
+
+*2. Les aspects intéressant, didactique, complet*
+
+*3. La qualité Rmarkdown, la qualité de l'écriture*
+
+*4. Didactique, conformité aux exigences vues plus haut et comporte du calcul symbolique et du calcul numérique*
+
+*5. La qualité du LaTeX et des illustrations, la qualité de l'écriture, le choix des ressource internet, la compréhension personnelle des concepts*
+
+# II. Synthèse du travail en question
+
+dplyr est une grammaire de manipulation de données, fournissant un ensemble cohérent de verbes qui vous aident à résoudre les défis de manipulation de données les plus courants.
+
+Tout cela se combine naturellement avec *group_by ()* qui vous permet d'effectuer n'importe quelle opération «par groupe». Vous pouvez en savoir plus sur eux dans *vignette ("dplyr")*. En plus de ces verbes à table unique, dplyr fournit également une variété de verbes à deux tables, que vous pouvez découvrir en *vignette ("two-table")*.
+
+dplyr est conçu pour résumer la manière dont les données sont stockées. Cela signifie qu'en plus de travailler avec des trames de données locales, vous pouvez également travailler avec des tables de base de données distantes, en utilisant exactement le même code R. Installez le package dbplyr puis lisez *vignette ("databases", package = "dbplyr")*.
+
+Nous allons maintenant étudier le code de Amine BEN dans le chapitre suivant[@Amine].
+
+# III. Extrait commenté des parties de code
+
+```{r}
+#Nous essayerons d'utiliser le package Dplyr au maximum grâce a des exemples.
+#install.packages("dplyr")
+library(dplyr)
+#install.packages("questionr")
+library(questionr)
+data(hdv2003)
+rest <- hdv2003
+#install questionr et biblio pour data hdv2003
+#On commance avec la cmd Filtre() >, <, == exemple :
+rest1 <- filter(rest, age >20)
+head(rest1)
+rest2 <- filter(rest,age == 22)
+head(rest2)
+#Filtre aussi les mots
+rest3 <- filter(rest, sport=='Non')
+head(rest3)
+#On peut aussi appliquer un filtre sur les 2
+rest4 <- filter(rest, age >20 & sport == 'Non')
+head(rest4)
+#ou
+rest5 <- filter(rest, age >20 , sport == 'Non')
+head(rest5)
+#Et on ajoute 3 critères aussi !
+rest6 <- filter(rest, age >20 ,sexe =='Femme', sport == 'Non')
+head(rest6)
+#creer des intervalles
+rest7 <- filter(rest,age >= 22, age <= 30)
+head(rest7)
+#faire une selection multiple
+rest8 <- filter(rest,age %in% c(20,22,60))
+head(rest8)
+# faire une selection multiple pour des elements different de 
+rest9 <- filter(rest,!age %in% c(20,22,60))
+head(rest9)
+rm(list = ls())
+#Command Mutate ()
+data(hdv2003)
+rest <- hdv2003
+#Creer une colonne avec age*10
+rest1 <- mutate(rest, age*10)
+head(rest1)
+#creer une colonne avec une difference 
+head <- mutate(rest, diff= age-freres.soeurs)
+#creer une variable loi normal 
+y <- rnorm(2000,0,1)
+#attribué a chaque ligne 
+rest3 <- mutate(rest, nouv_var=y)
+head(rest3)
+rm(list = ls())
+# Command Arrange()
+data(hdv2003)
+rest <- hdv2003
+#Ranger les colonnes de facon croissante 
+rest1 <- arrange(rest, age)
+head(rest1)
+#Ranger les colonnes de façon decroissante 
+rest2 <- arrange(rest, desc(age))
+head(rest2)
+#Ranger une colonne non numerique Z à A
+rest3 <- arrange (rest, qualif)
+head(rest3)
+#Ranger une colonne non numerique A à Z
+rest4 <- arrange (rest, desc(qualif))
+head(rest4)
+#ranger plusieurs colonne 
+rest5 <- arrange(rest,nivetud,age)
+head(rest5)
+#ranger plusieurs colonne l'une asc et l'autre desc
+rest6 <- arrange(rest,nivetud,desc(age))
+head(rest6)
+rm(list = ls())
+```
+
+# IV. Evaluation du travail en question
+
+*1. Rmd se comporte bien à l'exécution (4/4)*
+
+*2. Les aspects intéressant, didactique, complet (4/4)*
+
+*3. La qualité Rmarkdown, la qualité de l'écriture (4/4)*
+
+*4. Didactique, conformité aux exigences vues plus haut et comporte du calcul symbolique et du calcul numérique (3/4)*
+
+*5. La qualité du LaTeX et des illustrations, la qualité de l'écriture, le choix des ressource internet, la compréhension personnelle des concepts (3/4)*
+
+# V. Conclusion
+
+En général, ce travail de Amine exécuse bien dans l'environement de R. Et il nous explique clairement comment fonctionner le package Dplyr dans un rmd, On comprend rapidement le but principal de ce package. L'aspect est intéressant, complet et propre. D'ailleurs, il a expliqué chaque code, on peut les comprendre facilement. Il a présenté des fonctions qui peut être utile pour analyser des données dans les rapports.La qualité Rmarkdown, la qualité de l'écriture et La qualité du LaTeX sont plus haut.
+
+# VI. Bibliographie

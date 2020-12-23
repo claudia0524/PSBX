@@ -1,0 +1,174 @@
+---
+title: "Analyse de Pracma par Xueting YIN"
+author: "Wenjun ZHAO"
+date: "12/22/2020"
+output: pdf_document
+bibliography : pracma.bib
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# I. Introduction
+
+Vous pouvez retrouver mon travail sur mon Github, **https://github.com/claudia0524/PSBX**.
+
+Pour ce dossier, nous avons étudier le travail de Xueting YIN, étudiant en M2DM au sein de PSB.
+
+Nous avons trouvé son dossier sur son Github : **https://github.com/yinxueting/PSBX/**
+
+Maintenant, nous allons établir mes 5 critères d'évaluations, qui seront les mêmes pour tout les dossiers que j'ai vais étudier pour ce devoir:
+
+**Les cinq critères d'évaluation**
+
+*1. Rmd se comporte bien à l'exécution*
+
+*2. Les aspects intéressant, didactique, complet*
+
+*3. La qualité Rmarkdown, la qualité de l'écriture*
+
+*4. Didactique, conformité aux exigences vues plus haut et comporte du calcul symbolique et du calcul numérique*
+
+*5. La qualité du LaTeX et des illustrations, la qualité de l'écriture, le choix des ressource internet, la compréhension personnelle des concepts*
+
+# II. Synthèse du travail en question
+
+Pracma est un package qui fournit un grand nombre de fonctions d'analyse numérique et d'algèbre linéaire, d'optimisation numérique, d'équations différentielles, de séries chronologiques, ainsi que de certaines fonctions mathématiques spéciales bien connues. Utilise les noms de fonction 'MATLAB' le cas échéant pour simplifier le portage.[@xueting]
+
+Nous allons maintenant étudier le code de Xueting dans le chapitre suivant.
+
+# III. Extrait commenté des parties de code
+
+Installation
+```{r}
+# install.packages("pracma")
+library(pracma)
+```
+
+## Quelques exemples:
+and(l, k), or(l, k)
+
+Effectue une opération logique sur les tableaux l et k et renvoie un tableau contenant des éléments définis sur l'un ou l'autre
+1 (TRUE) ou 0 (FALSE), c'est-à-dire dans le style Matlab.
+```{r}
+A <- matrix(c(6, 0.5, 0,
+              0.5, 5, 0.75, 
+              0.35, 0, 0, 
+              0.5, 0.85, 0.6 ), 4, 3, byrow=TRUE)
+B <- matrix(c( 0, 1, 0, 
+               1, 1, 1, 
+               0, 1, 0,
+               0, 1, 0 ), 4, 3, byrow=TRUE)
+and(A, B)
+or(A, B)
+```
+
+eye(n, m = n), ones(n, m = n), zeros(n, m = n)
+
+Matrice de taille n x m. La valeur par défaut est une matrice carrée si m est manquant.
+Pas de baisse de dimensions; si n = 1, renvoie toujours une matrice et non un vecteur.
+```{r}
+eye(3)
+ones(3, 1)
+zeros(1, 3)
+```
+
+blanks: créer une chaîne de caractères vides
+```{r}
+blanks(10)
+```
+
+ceil (n) est un alias pour plafond () et arrondit au plus petit entier égal ou supérieur à n.
+
+fix (n) tronque les valeurs vers 0 et est un alias pour trunc ().
+```{r}
+x <- c(-1.2, -0.8, 0, 0.5, 1.1, 2.9)
+ceil(x)
+Fix(x)
+```
+
+randperm(a, k): génère une permutation aléatoire de k des éléments a, si a est un vecteur, ou de 1: a si a est un seul entier.
+```{r}
+randperm(1:6, 3)
+randperm(6, 6)
+randperm(11:20, 5)
+```
+
+
+Nous allons maintenant étudier le code de Xueting YIN dans le chapitre suivant.
+
+# III. Extrait commenté des parties de code
+
+Installation
+```{r}
+# install.packages("pracma")
+library(pracma)
+```
+
+## Quelques exemples:
+and(l, k), or(l, k)
+
+Effectue une opération logique sur les tableaux l et k et renvoie un tableau contenant des éléments définis sur l'un ou l'autre
+1 (TRUE) ou 0 (FALSE), c'est-à-dire dans le style Matlab.
+```{r}
+A <- matrix(c(6, 0.5, 0,
+              0.5, 5, 0.75, 
+              0.35, 0, 0, 
+              0.5, 0.85, 0.6 ), 4, 3, byrow=TRUE)
+B <- matrix(c( 0, 1, 0, 
+               1, 1, 1, 
+               0, 1, 0,
+               0, 1, 0 ), 4, 3, byrow=TRUE)
+and(A, B)
+or(A, B)
+```
+
+eye(n, m = n), ones(n, m = n), zeros(n, m = n)
+
+Matrice de taille n x m. La valeur par défaut est une matrice carrée si m est manquant.
+Pas de baisse de dimensions; si n = 1, renvoie toujours une matrice et non un vecteur.
+```{r}
+eye(3)
+ones(3, 1)
+zeros(1, 3)
+```
+
+blanks: créer une chaîne de caractères vides
+```{r}
+blanks(10)
+```
+
+ceil (n) est un alias pour plafond () et arrondit au plus petit entier égal ou supérieur à n.
+
+fix (n) tronque les valeurs vers 0 et est un alias pour trunc ().
+```{r}
+x <- c(-1.2, -0.8, 0, 0.5, 1.1, 2.9)
+ceil(x)
+Fix(x)
+```
+
+randperm(a, k): génère une permutation aléatoire de k des éléments a, si a est un vecteur, ou de 1: a si a est un seul entier.
+```{r}
+randperm(1:6, 3)
+randperm(6, 6)
+randperm(11:20, 5)
+```
+
+# IV. Evaluation du travail en question
+
+*1. Rmd se comporte bien à l'exécution (4/4)*
+
+*2. Les aspects intéressant, didactique, complet (3/4)*
+
+*3. La qualité Rmarkdown, la qualité de l'écriture (4/4)*
+
+*4. Didactique, conformité aux exigences vues plus haut et comporte du calcul symbolique et du calcul numérique (3/4)*
+
+*5. La qualité du LaTeX et des illustrations, la qualité de l'écriture, le choix des ressource internet, la compréhension personnelle des concepts (3/4)*
+
+# V. Conclusion
+
+En général, ce tracail de xueting exécuse bien dans l'environement de R. Et il nous explique clairement comment fonctionner le package pracma dans un rmd. L'aspect est intéressant, complet et propre. La qualité Rmarkdown et la qualité de l'écriture sont ainsi bien. Didactique, conformité aux exigences vues plus haut. La qualité du LaTeX fonctionne bien aussi, et il peut montrer le but principal de package de pracma. Le mieux point est qu'il présente des ressources internet. Il utilise des calcul symbolique et du calcul numérique.
+
+# VI. Bibliographie

@@ -1,0 +1,114 @@
+---
+title: "Analyse de GGPLOT2 par Amine BEN"
+author: "Wenjun ZHAO"
+date: "12/20/2020"
+output: pdf_document
+bibliography : ggplot2.bib
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# I. Introduction
+
+Vous pouvez retrouver mon travail sur mon Github, **https://github.com/claudia0524/PSBX**.
+
+Pour ce dossier, nous avons étudier le travail de Amine BEN, étudiant en M2DM au sein de PSB.
+
+Nous avons trouvé son dossier sur son Github : **https://github.com/benben62/PSBX.git**
+
+Maintenant, nous allons établir mes 5 critères d'évaluations, qui seront les mêmes pour tout les dossiers que j'ai vais étudier pour ce devoir:
+
+**Les cinq critères d'évaluation**
+
+*1. Rmd se comporte bien à l'exécution*
+
+*2. Les aspects intéressant, didactique, complet*
+
+*3. La qualité Rmarkdown, la qualité de l'écriture*
+
+*4. Didactique, conformité aux exigences vues plus haut et comporte du calcul symbolique et du calcul numérique*
+
+*5. La qualité du LaTeX et des illustrations, la qualité de l'écriture, le choix des ressource internet, la compréhension personnelle des concepts*
+
+# II. Synthèse du travail en question
+
+ggplot2 est un package R dédié à la visualisation de données. Cela peut grandement améliorer la qualité et l'esthétique de vos graphiques et vous rendra beaucoup plus efficace dans leur création.
+
+ggplot2 permet de construire presque n'importe quel type de graphique. Le graphe R
+gallery se concentre sur cela, donc presque toutes les sections commencent par des exemples de ggplot2.
+
+Nous allons maintenant étudier le code de Amine BEN dans le chapitre suivant[@Amine].
+
+# III. Extrait commenté des parties de code
+
+```{r}
+# Tout d'abord nous devons installer le package Ggplot avec ce package
+#   Install.packages(ggplot2) 
+#Pour commencer 
+library(ggplot2)
+library(dplyr)
+#installed.packages("viridis")
+require(maps)
+require(viridis)
+theme_set(
+  theme_void()
+)
+monde_map <- map_data("world")
+ggplot(monde_map, aes(x = long, y = lat, group = group)) + geom_polygon(fill="lightgray", colour = "white") # cette fonction permet d'utiliser la longetiude et la latitude du fichier wolrd data pour virtualiser une carte. 
+# Afficher quelque pays de l'Asie
+some.asie.countries <- c(
+  "Russia", "China", "Iran", "Mongolia", "India",
+  "Australia", "Kazakhstan", "North Korea", "South Korea",
+  "Nepal", "Pakistan","Japan","Iraq"
+)
+#Nous pouvons ajouter autant d'etat que possible a la carte d'adapte grace aux noms des pays exemple : turkey,syria,afghanistan,syria
+# Recuperer la map 
+some.asie.maps <- map_data("world", region = some.asie.countries)
+# Utilisé comme coordonnée étiquette pour les noms de pays
+region.lab.data <- some.asie.maps %>%
+  group_by(region) %>%
+  summarise(long = mean(long), lat = mean(lat))
+ggplot(some.asie.maps, aes(x = long, y = lat)) +
+  geom_polygon(aes( group = group, fill = region))+
+  geom_text(aes(label = region), data = region.lab.data,  size = 3, hjust = 0.5)+
+  scale_fill_viridis_d()+
+  theme_void()+
+  theme(legend.position = "left") # <- permet de choisir la taille des noms des pays, de regrouper les pays grace à la colonne region et de mettre une legende a gauche/droite ou none
+#Autre exemple mais sans utiliser la geolocalisation  
+#Il faut installer les packages suivant 
+#install.packages('usmap')
+#install.packages('label')
+#install.packages('maptools')
+#install.packages('rgdal')
+library(usmap)
+require(usmap)
+#Permet d'afficher l'ensemble du pays  
+plot_usmap(regions = "counties")
+usmap::plot_usmap("states", labels = TRUE)
+cities_t <- usmap_transform(citypop)
+#Permet d'afficher un ou plusieurs Etat aux USA grace à l'acronym de l'etat
+usmap::plot_usmap("counties",
+                  include = c("MA","CT"),
+                  labels = TRUE, label_color = "black")
+```
+
+
+# IV. Evaluation du travail en question
+
+*1. Rmd se comporte bien à l'exécution (4/4)*
+
+*2. Les aspects intéressant, didactique, complet (4/4)*
+
+*3. La qualité Rmarkdown, la qualité de l'écriture (4/4)*
+
+*4. Didactique, conformité aux exigences vues plus haut et comporte du calcul symbolique et du calcul numérique (3/4)*
+
+*5. La qualité du LaTeX et des illustrations, la qualité de l'écriture, le choix des ressource internet, la compréhension personnelle des concepts (3/4)*
+
+# V. Conclusion
+
+En général, ce travail de Amine exécuse bien dans l'environement de R. Et il nous explique clairement comment fonctionner le package GGPLOT2 dans un rmd, On comprend rapidement le but principal de ce package. L'aspect est intéressant, complet et propre. D'ailleurs, il a expliqué chaque code, on peut les comprendre facilement. Il a présenté des graphies qui peut être utile pour analyser des données dans les rapports. La qualité Rmarkdown, la qualité de l'écriture et La qualité du LaTeX et des illustrations sont plus hauts.
+
+# VI. Bibliographie

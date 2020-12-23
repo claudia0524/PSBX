@@ -1,0 +1,90 @@
+---
+title: "Analyse de caret par Jean Souris"
+author: "Wenjun ZHAO"
+date: "12/20/2020"
+output: pdf_document
+bibliography : caret.bib
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# I. Introduction
+
+Vous pouvez retrouver mon travail sur mon Github, **https://github.com/claudia0524/PSBX**.
+
+Pour ce dossier, nous avons étudier le travail de Jean Souris, étudiant en M2DM au sein de PSB.
+
+Nous avons trouvé son dossier sur son Github : **https://github.com/jeansouris/PSBX.git**
+
+Maintenant, nous allons établir mes 5 critères d'évaluations, qui seront les mêmes pour tout les dossiers que j'ai vais étudier pour ce devoir:
+
+**Les cinq critères d'évaluation**
+
+*1. Rmd se comporte bien à l'exécution*
+
+*2. Les aspects intéressant, didactique, complet*
+
+*3. La qualité Rmarkdown, la qualité de l'écriture*
+
+*4. Didactique, conformité aux exigences vues plus haut et comporte du calcul symbolique et du calcul numérique*
+
+*5. La qualité du LaTeX et des illustrations, la qualité de l'écriture, le choix des ressource internet, la compréhension personnelle des concepts*
+
+# II. Synthèse du travail en question
+
+Caret est utilisé pour le Machine Learning.
+
+Caret est un des plus gros package de R, qui permet de faire de la prediction de données.Il y a 2 types de modèle que nous pouvons prédire avec Caret : la CLassification, qui relève le côté qualitatif, et la regression, qui elle se concentre sur le côté quantitatif.
+
+Dans ce dossier, nous allons utiliser une fonction qui nous montrera la séparation des données d'une data frame.
+
+Mais, avant de passer à l'application, nous allons avoir besoin des packages "lattice", "ggplot2", et "Caret", afin d'exploiter les données que nous souhaitons[@jean].
+
+Nous allons maintenant étudier le code de Jean dans le chapitre suivant.
+
+# III. Extrait commenté des parties de code
+
+```{r}
+#install.packages("lattice")
+#Ensuite, nous allons les appeler avec la fonction library :
+library(lattice)
+library(ggplot2)
+library(caret)
+
+#Création d'un tableau séparant les données en gardant l'écart-type global : createDataPartition
+#Tout dabord, nous allons générer un nombre aléatoire grâce à la fonction "set.seed" :
+set.seed(2020)
+
+#Maintenant que notre chiffre aléatoire est généré, nous pouvons créer nos différents tableaux grâce à la fonction "creatDataPartition":
+Essaie_1 <- createDataPartition(iris$Species, p = .6, 
+                                  list = FALSE, 
+                                  times = 3)
+head(Essaie_1)
+
+#Notre tableau a donc généré des nombres aléatoire entre les différentes espèces d'iris. Dans cet exemple, nous avons séparé les données de la manière 60% - 40%.
+#Le terme "liste = FALSE" permet d'éviter que les données ne se retrouve sous forme de liste au lieu de tableau.(comme vous pourrez le voir ci-dessous) :
+Essaie_2 <- createDataPartition(iris$Species, p = .6, 
+                                list = TRUE, 
+                                times = 2)
+head(Essaie_2)
+```
+
+# IV. Evaluation du travail en question
+
+*1. Rmd se comporte bien à l'exécution (4/4)*
+
+*2. Les aspects intéressant, didactique, complet (3/4)*
+
+*3. La qualité Rmarkdown, la qualité de l'écriture (4/4)*
+
+*4. Didactique, conformité aux exigences vues plus haut et comporte du calcul symbolique et du calcul numérique (3/4)*
+
+*5. La qualité du LaTeX et des illustrations, la qualité de l'écriture, le choix des ressource internet, la compréhension personnelle des concepts (3/4)*
+
+# V. Conclusion
+
+En général, ce tracail de Jean exécuse bien dans l'environement de R. Et il nous explique clairement comment fonctionner le package Caret dans un rmd, On comprend rapidement le but principal de ce package. D'ailleurs, la qualité de Rmarkdown et l'écriture sont ainsi bien, conformité aux exigences vues plus haut. L'aspect est intéressant, complet et propre. La qualité Rmarkdown et la qualité de l'écriture sont plus hauts, La qualité du LaTeX et des illustrations ne sont pas mal.
+
+# VI. Bibliographie
